@@ -1,6 +1,5 @@
 # SpendWise API - Student Expense Tracker
 Sub-Group 3B | Node.js + Express Project
-A simple Node.js + Express API for tracking student expenses.
 
 <p align="center">
   <img src="./assets/spendwise-logo.png" width="350" alt="SpendWise Logo" />
@@ -22,13 +21,7 @@ A simple Node.js + Express API for tracking student expenses.
 
 ---
 
-### 💡 About & Tagline
-> **Primary Tagline:** "Track Smart, Spend Wise, Save Better."
-> **Branding:** API • EXPENSE TRACKER
-
-SpendWise helps students track expenses, manage budgets, and get insights — built as a RESTful API.
-
-### 📌 About
+### 💡 About
 SpendWise is a RESTful API designed to help students track daily expenses, manage budgets, and gain quick insights into spending habits. This is **Solution 2 of 3** for the overall Group 3 project.
 
 > **Mission:** Making student finances simple and transparent.
@@ -57,7 +50,7 @@ BD-SPENDWISE-API/
 │   │   ├── flash.js                  Analytics routes
 │   │   └── vault.js                  Budget routes
 │   └── utils/                        Helpers (to be filled in)
-├── .env.example                      Environment variable template
+├── .env.example
 ├── .gitignore
 ├── server.js                         App entry point (port 3000)
 ├── package.json
@@ -65,18 +58,15 @@ BD-SPENDWISE-API/
 └── README.md
 ```
 
-**Run the server with `npm run dev` and open http://localhost:3000**
-
 ### 🚀 How to Run
 
 ```bash
 npm install
 cp .env.example .env
-# Fill in MONGO_URI and JWT_SECRET in .env
 npm run dev
 ```
 
-Server will show: `Server running on 3000`
+Server runs on http://localhost:3000
 
 ## API Endpoints
 
@@ -86,12 +76,11 @@ Base URL: `http://localhost:3000`
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/expenses` | List all expenses (stub — real data pending DB) |
-| POST | `/api/expenses` | Create a new expense (planned) |
+| GET | `/api/expenses` | Stub route, returns a placeholder message |
+| GET | `/api/v1/atlas/expenses` | List all expenses |
+| POST | `/api/v1/atlas/expenses` | Create a new expense |
 
-### POST /api/expenses — example
-
-Request body:
+### POST /api/v1/atlas/expenses — example
 
 ```json
 {
@@ -102,15 +91,15 @@ Request body:
 }
 ```
 
-Response: `201 Created`
+Response: `201 Created` with the created expense.
 
-### Feature routes (planned)
+### Other feature routes
 
-The `atlas`, `flash`, and `vault` routers in `src/routes/` will be mounted under `/api/v1/` once their endpoints are implemented:
-
-- `/api/v1/atlas` — Expense CRUD
-- `/api/v1/flash` — Analytics
-- `/api/v1/vault` — Budgets
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/v1/atlas/summary` | Atlas summary (stub) |
+| GET | `/api/v1/flash/summary` | Flash summary (stub) |
+| GET | `/api/v1/vault/summary` | Vault summary (stub) |
 
 ## Sample Data
 - Food: Lunch, Garri
@@ -119,20 +108,16 @@ The `atlas`, `flash`, and `vault` routers in `src/routes/` will be mounted under
 
 ## Tools Used
 - Express.js
-- Thunder Client / Postman for testing
+- Thunder Client / Postman
 - Node.js
 
 # Contributing
 
-Fork the repo
-
-Create a new branch (`git checkout -b feature/your-feature`)
-
-Commit changes (`git commit -m "Add your feature"`)
-
-Push to branch (`git push origin feature/your-feature`)
-
-Open a Pull Request
+1. Fork the repo
+2. Create a branch (`git checkout -b feature/your-feature`)
+3. Commit (`git commit -m "Add your feature"`)
+4. Push (`git push origin feature/your-feature`)
+5. Open a Pull Request
 
 ## Environment Setup
 
@@ -140,12 +125,7 @@ Open a Pull Request
 cp .env.example .env
 ```
 
-Then fill in:
-- `MONGO_URI` — your MongoDB connection string
-- `JWT_SECRET` — a random secret for signing tokens
-
-### 🔮 Future Work
-The second architecture (microservices under `/api/v1/`) will be used for full Group 3 integration.
+Fill in `MONGO_URI` and `JWT_SECRET` in `.env`.
 
 ### 👥 Team 3B
 - Lead (Raliat Babatunde)
