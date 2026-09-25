@@ -3,7 +3,7 @@ Sub-Group 3B | Node.js + Express Project
 A simple Node.js + Express API for tracking student expenses.
 
 <p align="center">
-  <img src="./assets/logo.png" width="350" alt="SpendWise Logo" />
+  <img src="./assets/spendwise-logo.png" width="350" alt="SpendWise Logo" />
 </p>
 
 <h1 align="center">SpendWise</h1>
@@ -48,7 +48,7 @@ This is the original architecture we are using for Sub-Group 3B submission:
 ```
 spendwise-api/
 ├─ assets/
-│  └─ logo.png
+│  └─ spendwise-logo.png
 ├─ server.js          ----> Main entry (Port 3000)
 ├─ .env
 ├─ README.md
