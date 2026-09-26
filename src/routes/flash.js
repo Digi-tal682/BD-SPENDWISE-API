@@ -37,4 +37,42 @@ router.get('/summary', async (req, res, next) => {
   }
 });
 
+// Total spent per category, biggest first
+router.get('/by-category', async (req, res, next) => {
+  try {
+    const { from, to } = req.query;
+
+    if (from && isNaN(new Date(from))) {
+      return res.status(400).json({ success: false, message: 'Invalid from date' });
+    }
+    if (to && isNaN(new Date(to))) {
+      return res.status(400).json({ success: false, message: 'Invalid to date' });
+    }
+
+    const match = {};
+    if (from || to) {
+      match.date = {};
+      if (from) match.date.$gte = new Date(from);
+      if (to) match.date.$lte = new Date(to);
+    }
+
+    const data = await Expense.aggregate([
+      { $match: match },
+      {
+        $group: {
+          _id: '$category',
+          total: { $sum: '$amount' },
+          count: { $sum: 1 }
+        }
+      },
+      { $project: { _id: 0, category: '$_id', total: 1, count: 1 } },
+      { $sort: { total: -1 } }
+    ]);
+
+    res.json({ success: true, data });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
