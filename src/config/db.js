@@ -2,10 +2,14 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log('MongoDB Connected');
+    const uri = process.env.MONGODB_URI || process.env.MONGO_URI;
+    if (!uri) throw new Error('MONGODB_URI missing in.env');
+
+    const conn = await mongoose.connect(uri);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.log('MongoDB not connected yet - framework ready, Team to connect before or on Saturday 26th Sept 2026');
+    console.error(`MongoDB Connection Failed: ${error.message}`);
+    process.exit(1);
   }
 };
 

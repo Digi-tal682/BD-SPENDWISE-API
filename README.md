@@ -66,11 +66,11 @@ cp .env.example .env
 npm run dev
 ```
 
-Server runs on http://localhost:3000
+Server runs on http://localhost:5000
 
 ## API Endpoints
 
-Base URL: `http://localhost:3000`
+Base URL: `http://localhost:5000`
 
 ### Expense endpoints
 
@@ -125,7 +125,7 @@ Response: `201 Created` with the created expense.
 cp .env.example .env
 ```
 
-Fill in `MONGO_URI` and `JWT_SECRET` in `.env`.
+Fill in `MONGODB_URI` and `JWT_SECRET` in `.env`.
 
 ### 👥 Team 3B
 - Lead (Raliat Babatunde)
