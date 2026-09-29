@@ -20,7 +20,12 @@ Sub-Group 3B | Node.js + Express Project
 </p>
 
 ---
+## 🚀 Live Deployment
+**Live URL:** https://bd-spendwise-api-digi-tal682.onrender.com
+**Status:** Live ✅ | MongoDB Connected ✅
+Test: Open the URL — you should see "SpendWise API is working + MongoDB config ready!"
 
+---
 ### 💡 About
 SpendWise is a RESTful API designed to help students track daily expenses, manage budgets, and gain quick insights into spending habits. This is **Solution 2 of 3** for the overall Group 3 project.
 
