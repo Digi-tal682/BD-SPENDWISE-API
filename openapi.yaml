@@ -1,20 +1,37 @@
 openapi: 3.0.0
 info:
-  title: BD Spendwise API - Group 3B
+  title: 💸 BD SPENDWISE API - Group 3B
   version: 1.0.0
   description: |
-    Expense Tracker API - Subgroup B
-    Live URL: https://bd-spendwise-api.onrender.com
-    Base Path: /api
+    ### Smart Expense Tracker API
+    **Live URL:** https://bd-spendwise-api.onrender.com
+    **Docs:** https://bd-spendwise-api.docs.buildwithfern.com
+
+    Built by Group 3B - Borderless Developers Bootcamp 2024
+    ---
+    **Features:**
+        - JWT Authentication
+        - Expense Management
+        - Category Tracking
 
 servers:
     - url: https://bd-spendwise-api.onrender.com
-    description: Live server (Render)
+    description: Live Server (Render)
+    - url: http://localhost:5000
+    description: Local Dev
+
+tags:
+    - name: Auth
+    description: Authentication endpoints
+    - name: Expenses
+    description: Manage user expenses
+    - name: Categories
+    description: Expense categories
 
 paths:
   /api/auth/register:
     post:
-      summary: Register a new user
+      summary: Register new user
       tags: [Auth]
       requestBody:
         required: true
@@ -25,17 +42,15 @@ paths:
               required: [name, email, password]
               properties:
                 name: { type: string, example: Digital}
-                email: { type: string, example: test@spendwise.com}
-                password: { type: string, example: 12345678}
+                email: { type: string, format: email, example: digital@spendwise.com}
+                password: { type: string, example: Password123}
       responses:
-        '201':
-          description: Created
-        '400':
-          description: Bad request
+        '201': { description: User created successfully }
+        '400': { description: User already exists }
 
   /api/auth/login:
     post:
-      summary: Login user
+      summary: Login user & get token
       tags: [Auth]
       requestBody:
         required: true
@@ -45,33 +60,86 @@ paths:
               type: object
               required: [email, password]
               properties:
-                email: { type: string }
-                password: { type: string }
+                email: { type: string, example: digital@spendwise.com}
+                password: { type: string, example: Password123}
       responses:
-        '200':
-          description: Login successful
+        '200': { description: Login successful - returns JWT }
+        '401': { description: Invalid credentials }
 
   /api/expenses:
     get:
-      summary: Get all expenses
+      summary: Get all expenses for logged user
       tags: [Expenses]
       security: [{ bearerAuth: [] }]
       responses:
-        '200': { description: OK }
+        '200': { description: List of expenses }
     post:
-      summary: Create expense
+      summary: Create new expense
       tags: [Expenses]
       security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title, amount, category]
+              properties:
+                title: { type: string, example: Lunch}
+                amount: { type: number, example: 1500}
+                category: { type: string, example: Food}
+                date: { type: string, format: date, example: 2024-06-24}
       responses:
-        '201': { description: Created }
+        '201': { description: Expense created }
+
+  /api/expenses/{id}:
+    get:
+      summary: Get single expense
+      tags: [Expenses]
+      security: [{ bearerAuth: [] }]
+      parameters:
+                - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Expense details }
+    put:
+      summary: Update expense
+      tags: [Expenses]
+      security: [{ bearerAuth: [] }]
+      parameters:
+                - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Updated }
+    delete:
+      summary: Delete expense
+      tags: [Expenses]
+      security: [{ bearerAuth: [] }]
+      parameters:
+                - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Deleted }
 
   /api/categories:
     get:
-      summary: Get categories
+      summary: Get all categories
       tags: [Categories]
       security: [{ bearerAuth: [] }]
       responses:
-        '200': { description: OK }
+        '200': { description: List of categories }
+    post:
+      summary: Create category
+      tags: [Categories]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Category created }
 
 components:
   securitySchemes:
