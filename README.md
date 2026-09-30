@@ -36,7 +36,7 @@ BD SpendWise API is a secure REST API for managing personal expenses. Built as a
 - **Docs:** Fern
 
 ### 📁 Project Structure
-BD-SPENDWISE-API/
+```BD-SPENDWISE-API/
 ├── assets/
 │   └── spendwise-logo.png      # Project banner logo
 ├── src/
@@ -63,7 +63,7 @@ BD-SPENDWISE-API/
 ├── .gitignore
 ├── openapi.yaml                # API documentation spec
 ├── package.json
-└── README.md
+└── README.md```
 
 ### 📡 API Endpoints
 | Method | Endpoint | Description | Auth |
@@ -95,6 +95,6 @@ JWT_SECRET=your_jwt_secret
 # Run
 npm run dev
 
-Team - Group 3BBabatunde Raliat - Set-up + Testing, Render Deployment Lead; Faith Samuel - Back End Lead (CRUD) and Olushola Osasan - Collaborator  <p align="center"><b>Built by Group 3B - Back End Development September Cohort 2026</b></p>
+Team - Group 3B Babatunde Raliat - Set-up + Testing, Render Deployment Lead; Faith Samuel - Back End Lead (CRUD) and Olushola Osasan - Collaborator                                                                                            <p align="center"><b>Built by Group 3B - Back End Development September Cohort 2026</b></p>
 
 
