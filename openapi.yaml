@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: BD Spendwise API - Group 3B
+  version: 1.0.0
+  description: |
+    Expense Tracker API - Subgroup B
+    Live URL: https://bd-spendwise-api.onrender.com
+    Base Path: /api
+
+servers:
+    - url: https://bd-spendwise-api.onrender.com
+    description: Live server (Render)
+
+paths:
+  /api/auth/register:
+    post:
+      summary: Register a new user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password]
+              properties:
+                name: { type: string, example: Digital}
+                email: { type: string, example: test@spendwise.com}
+                password: { type: string, example: 12345678}
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+
+  /api/auth/login:
+    post:
+      summary: Login user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string }
+                password: { type: string }
+      responses:
+        '200':
+          description: Login successful
+
+  /api/expenses:
+    get:
+      summary: Get all expenses
+      tags: [Expenses]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: OK }
+    post:
+      summary: Create expense
+      tags: [Expenses]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Created }
+
+  /api/categories:
+    get:
+      summary: Get categories
+      tags: [Categories]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: OK }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
