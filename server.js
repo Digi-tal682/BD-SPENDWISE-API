@@ -9,7 +9,7 @@ app.use(express.json());
 
 connectDB();
 
-const authMiddleware = require('./src/middleware/auth');
+const { protect } = require('./src/middleware/auth');
 
 app.get('/', (req, res) => {
   res.json({ message: 'Group 3B Spendwise Expense Tracker API running on port 5000' });
@@ -17,8 +17,8 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/api/auth', require('./src/routes/auth'));
-app.use('/api/categories', authMiddleware, require('./src/routes/categories'));
-app.use('/api/expenses', authMiddleware, require('./src/routes/expenseController'));
-app.use('/api/vault', authMiddleware, require('./src/routes/vault'));
+app.use('/api/categories', protect, require('./src/routes/categories'));
+app.use('/api/expenses', protect, require('./src/routes/expenseController'));
+app.use('/api/vault', protect, require('./src/routes/vault'));
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
