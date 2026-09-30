@@ -7,24 +7,18 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
-// Connect to MongoDB
 connectDB();
 
-// Health check
+const authMiddleware = require('./src/middleware/auth');
+
 app.get('/', (req, res) => {
-  res.send('SpendWise API is working + MongoDB config ready!');
+  res.json({ message: 'Group 3 Expense Tracker API running on port 5000' });
 });
 
-// Temporary stub, remove once expenses live in atlas routes
-app.get('/api/expenses', (req, res) => {
-  res.json({ message: 'List of expenses - ready for DB' });
-});
+// Routes
+app.use('/api/auth', require('./src/routes/auth'));
+app.use('/api/categories', authMiddleware, require('./src/routes/categories'));
+app.use('/api/expenses', authMiddleware, require('./src/routes/expenseController'));
+app.use('/api/vault', authMiddleware, require('./src/routes/vault'));
 
-// Feature routers
-app.use('/api/v1/atlas', require('./src/routes/atlas'));
-app.use('/api/v1/flash', require('./src/routes/flash'));
-app.use('/api/v1/vault', require('./src/routes/vault'));
-
-app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

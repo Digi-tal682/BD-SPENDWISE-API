@@ -8,5 +8,23 @@ const auth = (req, res, next) => {
   // Team will fill this logic
   next();
 };
+// middleware/auth.js
+const jwt = require('jsonwebtoken');
+const SECRET = 'group3-secret-key'; // use same for demo
 
+module.exports = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1]; // Bearer TOKEN
+
+  if (!token) {
+    return res.status(401).json({ message: 'No token, login first' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, SECRET);
+    req.userId = decoded.id; // This userId will filter all your models
+    next();
+  } catch (err) {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+};
 module.exports = auth;
