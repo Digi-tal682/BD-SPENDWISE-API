@@ -12,7 +12,7 @@ connectDB();
 const authMiddleware = require('./src/middleware/auth');
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Group 3 Expense Tracker API running on port 5000' });
+  res.json({ message: 'Group 3B Spendwise Expense Tracker API running on port 5000' });
 });
 
 // Routes

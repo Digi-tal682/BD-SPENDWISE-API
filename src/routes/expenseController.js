@@ -2,10 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const Expense = require('../models/expenses');
-const { protect } = require('./auth');
 
 
-router.get('/', protect, async (req, res) => {
+
+router.get('/', async (req, res) => {
   try {
     const expenses = await Expense.find({ user: req.user.id });
     res.json(expenses);
@@ -14,7 +14,7 @@ router.get('/', protect, async (req, res) => {
   }
 });
 
-router.post('/', protect, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const expense = await Expense.create({
       ...req.body,
