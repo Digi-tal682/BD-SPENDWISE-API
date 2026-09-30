@@ -1,7 +1,9 @@
-let users = [];
-let id = 1;
-module.exports = {
-  create: (d) => { const u = { id: String(id++), name: d.name, email: d.email, password: d.password, createdAt: new Date() }; users.push(u); return u; },
-  findByEmail: (email) => users.find(u => u.email === email),
-  findById: (id) => users.find(u => u.id === id)
-}
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true, lowercase: true },
+  password: { type: String, required: true }
+}, { timestamps: true });
+
+module.exports = mongoose.model('User', userSchema);
