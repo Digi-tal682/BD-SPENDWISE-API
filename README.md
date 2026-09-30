@@ -1,143 +1,100 @@
-# SpendWise API - Student Expense Tracker
-Sub-Group 3B | Node.js + Express Project
-
 <p align="center">
-  <img src="./assets/spendwise-logo.png" width="350" alt="SpendWise Logo" />
+  <img src="./assets/spendwise-logo.png" alt="SpendWise Banner" width="100%"/>
 </p>
 
-<h1 align="center">SpendWise</h1>
-<h3 align="center">Track Smart, Spend Wise, Save Better.</h3>
+<h1 align="center">BD SPENDWISE API</h1>
+<p align="center">Track Smart, Spend Wise, Save Better</p>
 
 <p align="center">
-  <b>API • EXPENSE TRACKER</b><br>
-  Sub-Group 3B | Group 3 Project - Solution 2 of 3
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Node.js-20.x-brightgreen" />
-  <img src="https://img.shields.io/badge/Express-5.x-black" />
-  <img src="https://img.shields.io/badge/Status-In%20Progress-yellow" />
+  <a href="https://bd-spendwise-api.onrender.com"><img src="https://img.shields.io/badge/Live API-Online-success?style=for-the-badge&logo=render" /></a>
+  <a href="https://bd-spendwise-api.docs.buildwithfern.com"><img src="https://img.shields.io/badge/Docs-Fern-blue?style=for-the-badge&logo=readthedocs" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/MongoDB-Connected-green?style=for-the-badge&logo=mongodb" /></a>
 </p>
 
 ---
-## 🚀 Live Deployment
-**Live URL:** https://bd-spendwise-api-digi-tal682.onrender.com
-**Status:** Live ✅ | MongoDB Connected ✅
-Test: Open the URL — you should see "SpendWise API is working + MongoDB config ready!"
 
----
-### 💡 About
-SpendWise is a RESTful API designed to help students track daily expenses, manage budgets, and gain quick insights into spending habits. This is **Solution 2 of 3** for the overall Group 3 project.
+### 📖 About
+BD SpendWise API is a secure REST API for managing personal expenses. Built as a capstone project by Group 3B - Back End Development September Cohort 2026.
 
-> **Mission:** Making student finances simple and transparent.
+### 🔗 Links
+- **Live URL:** https://bd-spendwise-api.onrender.com
+- **Documentation:** https://bd-spendwise-api.docs.buildwithfern.com
+- **GitHub:** https://github.com/Digi-tal682/BD-SPENDWISE-API
 
-### ✨ Core Features
-- Add / Edit / Delete expenses
-- Categorize spending (Food, Transport, Data, etc.)
-- Budget alerts via the Vault routes
-- Quick insights via the Flash routes
+### 🚀 Features
+- 🔐 JWT Authentication (Register/Login)
+- 💸 Expense CRUD Operations
+- 📊 Category Management
+- 🔍 Filter & Search Expenses
+- 🛡️ Protected Routes & Validation
 
-### 🏗️ Project Structure
+### 🛠 Tech Stack
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB, Mongoose
+- **Auth:** JWT, Bcrypt
+- **Deployment:** Render
+- **Docs:** Fern
 
-```
+### 📁 Project Structure
 BD-SPENDWISE-API/
 ├── assets/
-│   └── spendwise-logo.png
+│   └── spendwise-logo.png      # Project banner logo
 ├── src/
 │   ├── config/
-│   │   └── db.js                     MongoDB connection
+│   │   └── db.js               # MongoDB connection setup
+│   ├── controllers/
+│   │   ├── authController.js   # Register & Login logic
+│   │   ├── expenseController.js # Expense CRUD logic
+│   │   └── categoryController.js # Category logic
 │   ├── middleware/
-│   │   └── auth.js                   JWT auth middleware (in progress)
+│   │   └── authMiddleware.js   # JWT protection middleware
 │   ├── models/
-│   │   └── expenses.js               Mongoose schema for expenses
+│   │   ├── User.js             # User schema
+│   │   ├── Expense.js          # Expense schema
+│   │   └── Category.js         # Category schema
 │   ├── routes/
-│   │   ├── atlas.js                  Expense CRUD routes
-│   │   ├── flash.js                  Analytics routes
-│   │   └── vault.js                  Budget routes
-│   └── utils/                        Helpers (to be filled in)
-├── .env.example
+│   │   ├── authRoutes.js       # Auth endpoints
+│   │   ├── expenseRoutes.js    # Expense endpoints
+│   │   └── categoryRoutes.js   # Category endpoints
+│   ├── utils/
+│   │   └── generateToken.js    # JWT token generator
+│   └── server.js               # Entry point
+├── .env.example                # Env template
 ├── .gitignore
-├── server.js                         App entry point (port 3000)
+├── openapi.yaml                # API documentation spec
 ├── package.json
-├── package-lock.json
 └── README.md
-```
 
-### 🚀 How to Run
+### 📡 API Endpoints
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | /api/auth/register | Register user | No |
+| POST | /api/auth/login | Login user | No |
+| GET | /api/expenses | Get all expenses | Yes |
+| POST | /api/expenses | Create expense | Yes |
+| GET | /api/expenses/:id | Get one expense | Yes |
+| PUT | /api/expenses/:id | Update expense | Yes |
+| DELETE | /api/expenses/:id | Delete expense | Yes |
+| GET | /api/categories | Get categories | Yes |
+| POST | /api/categories | Create category | Yes |
 
+### ⚙️ Installation & Setup
 ```bash
+# Clone
+git clone https://github.com/Digi-tal682/BD-SPENDWISE-API.git
+cd BD-SPENDWISE-API
+
+# Install
 npm install
-cp .env.example .env
+
+# Env
+PORT=5000
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+
+# Run
 npm run dev
-```
 
-Server runs on http://localhost:5000
+Team - Group 3BBabatunde Raliat - Set-up + Testing, Render Deployment Lead; Faith Samuel - Back End Lead (CRUD) and Olushola Osasan - Collaborator  <p align="center"><b>Built by Group 3B - Back End Development September Cohort 2026</b></p>
 
-## API Endpoints
 
-Base URL: `http://localhost:5000`
-
-### Expense endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/expenses` | Stub route, returns a placeholder message |
-| GET | `/api/v1/atlas/expenses` | List all expenses |
-| POST | `/api/v1/atlas/expenses` | Create a new expense |
-
-### POST /api/v1/atlas/expenses — example
-
-```json
-{
-  "amount": 3000,
-  "category": "Food",
-  "date": "2026-09-19",
-  "description": "Shawarma after coding"
-}
-```
-
-Response: `201 Created` with the created expense.
-
-### Other feature routes
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/v1/atlas/summary` | Atlas summary (stub) |
-| GET | `/api/v1/flash/summary` | Flash summary (stub) |
-| GET | `/api/v1/vault/summary` | Vault summary (stub) |
-
-## Sample Data
-- Food: Lunch, Garri
-- Data: MTN monthly data
-- Transport: Bus fare
-
-## Tools Used
-- Express.js
-- Thunder Client / Postman
-- Node.js
-
-# Contributing
-
-1. Fork the repo
-2. Create a branch (`git checkout -b feature/your-feature`)
-3. Commit (`git commit -m "Add your feature"`)
-4. Push (`git push origin feature/your-feature`)
-5. Open a Pull Request
-
-## Environment Setup
-
-```bash
-cp .env.example .env
-```
-
-Fill in `MONGODB_URI` and `JWT_SECRET` in `.env`.
-
-### 👥 Team 3B
-- Lead (Raliat Babatunde)
-- (Victor Oriabure)
-- [Favour Samuel, ZAH NEMBO, Emmanuel Odekunle, Lawal Yusuf, Zaynab Babatunde, Olusola Osasan, Ishoborabyose Clementine, Samuel Kweku Tawiah Agbozo, Oluwakayode Adenibuyan, Waheed Royhan]
-
-<p align="center"><i>Built with ❤️ - Track Smart, Spend Wise, Save Better.</i></p>
-
-## Author
-Group 3B - SpendWise API Project 2026
