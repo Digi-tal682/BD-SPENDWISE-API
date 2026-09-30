@@ -4,27 +4,33 @@
 // 2. Verify with jwt.verify(token, process.env.JWT_SECRET)
 // 3. Add decoded user to req.user and call next()
 
-const auth = (req, res, next) => {
-  // Team will fill this logic
-  next();
-};
-// middleware/auth.js
 const jwt = require('jsonwebtoken');
-const SECRET = 'group3-secret-key'; // use same for demo
+const User = require('../models/user');
+const SECRET = 'group3-secret-key';
 
-module.exports = (req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1]; // Bearer TOKEN
+const protect = (req, res, next) => {
+  let token;
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    token = req.headers.authorization.split(' ')[1];
+  }
 
   if (!token) {
-    return res.status(401).json({ message: 'No token, login first' });
+    return res.status(401).json({ message: 'Not authorized, no token' });
   }
 
   try {
     const decoded = jwt.verify(token, SECRET);
-    req.userId = decoded.id; // This userId will filter all your models
+    const user = User.findById(decoded.id);
+
+    if (!user) {
+      return res.status(401).json({ message: 'Not authorized, user not found' });
+    }
+
+    req.user = user;
     next();
-  } catch (err) {
-    return res.status(401).json({ message: 'Invalid token' });
+  } catch (error) {
+    return res.status(401).json({ message: 'Not authorized, token failed' });
   }
 };
-module.exports = auth;
+
+module.exports = { protect };
